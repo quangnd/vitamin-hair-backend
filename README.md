@@ -20,4 +20,4 @@ This is a very basic repository using HapiJS for serving API.
 
 ## Note
 
-- `babel-watch` could be crash when it was occurred `Error: Cannot find module './chalkConfig'`. You should kill the current command with `Ctrt+C` and re-run `npm start -s`.
+- `babel-watch` could be crash when it was occurred `Error: Cannot find module './chalkConfig'`. You should kill the current command with `Ctrt+C` and re-run `npm run dev`.
