@@ -7,6 +7,7 @@ This is a very basic repository using HapiJS for serving API.
 - Install packages: `npm install`
 - Run: `npm run dev`
 - Build: `npm run build`
+- To setup mysql database, rename *.env_example* to *.env* and change the values.
 
 ## Todo
 
