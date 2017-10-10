@@ -1,13 +1,13 @@
 
 require('babel-core/register');
 import {chalkProcessing} from './tools/chalkConfig';
-import routes from './src/routes';
+import routes from './routes';
 
 const Hapi = require('hapi');
 const Good = require('good');
 const server = new Hapi.Server();
 
-server.connection({ port: process.env.PORT || 3001, host: 'localhost' });
+server.connection({ port: process.env.PORT || 3001 });
 
 const routeConfig = {
   state: {
@@ -20,7 +20,7 @@ server.route({
   method: 'GET',
   path: '/',
   handler: function (request, reply) {
-      reply('Hello, world!');
+      reply({ jsondata: "done" });
   },
   config: routeConfig
 });
@@ -51,6 +51,6 @@ server.register({
     if (err) {
       throw err;
     }
-    server.log('info', chalkProcessing(`Server running at: ${server.info.uri}`));
+    server.log('info', chalkProcessing(`Server running at : ${server.info.uri}`));
   });
 });
