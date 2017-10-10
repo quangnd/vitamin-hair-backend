@@ -7,7 +7,7 @@ const Hapi = require('hapi');
 const Good = require('good');
 const server = new Hapi.Server();
 
-server.connection({ port: process.env.PORT || 3000, host: 'localhost' });
+server.connection({ port: process.env.PORT || 3001, host: 'localhost' });
 
 const routeConfig = {
   state: {
