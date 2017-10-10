@@ -5,7 +5,8 @@ This is a very basic repository using HapiJS for serving API.
 ## Install
 
 - Install packages: `npm install`
-- Run: `npm start -s`
+- Run: `npm run dev`
+- Build: `npm run build`
 
 ## Todo
 
