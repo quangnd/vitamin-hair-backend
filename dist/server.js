@@ -15,7 +15,7 @@ var Hapi = require('hapi');
 var Good = require('good');
 var server = new Hapi.Server();
 
-server.connection({ port: process.env.PORT || 3001, host: process.env.HOST || 'localhost' });
+server.connection({ port: process.env.PORT || 3001 });
 
 var routeConfig = {
   state: {
