@@ -11,6 +11,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 require('babel-core/register');
 
 
+var user = require('./controllers/user');
+
 var Hapi = require('hapi');
 var Good = require('good');
 var server = new Hapi.Server();
@@ -32,6 +34,16 @@ server.route({
   method: 'GET',
   path: '/',
   handler: function handler(request, reply) {
+    reply({ jsondata: "done" });
+  },
+  config: routeConfig
+});
+
+server.route({
+  method: 'GET',
+  path: '/users',
+  handler: function handler(request, reply) {
+    console.log(user.getAllUsers);
     reply({ jsondata: "done" });
   },
   config: routeConfig

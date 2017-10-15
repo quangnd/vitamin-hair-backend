@@ -1,4 +1,4 @@
-const config = require('../knexfile');
+const config = require('../../knexfile');
 const knex = require('knex')(config);
 const bookshelf = require('bookshelf')(knex);
 
@@ -7,4 +7,4 @@ const bookshelf = require('bookshelf')(knex);
 
 knex.migrate.latest();
 
-module.exports = bookshelf;
+module.exports.bookshelf = bookshelf;

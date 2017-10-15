@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../knexfile');
+var config = require('../../knexfile');
 var knex = require('knex')(config);
 var bookshelf = require('bookshelf')(knex);
 
@@ -9,4 +9,4 @@ var bookshelf = require('bookshelf')(knex);
 
 knex.migrate.latest();
 
-module.exports = bookshelf;
+module.exports.bookshelf = bookshelf;
