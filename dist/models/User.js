@@ -5,9 +5,9 @@
 var bookshelf = require('../tools/bookShelfConfig').bookshelf;
 
 var User = bookshelf.Model.extend({
-    tableName: 'users'
+  tableName: 'users'
 });
 
 module.exports = {
-    User: User
+  User: User
 };
