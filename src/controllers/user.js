@@ -2,7 +2,7 @@ import generateToken from '../utils/auth';
 var User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+var Mail = require('./sendEmail');
 /**
  * POST /login
  * Sign in with email and password
@@ -40,8 +40,8 @@ var signupPost = function (req, rep) {
     name: data.name,
     email: data.email,
     password: data.password,
-    phone_number: data.phone_number,
-    referral_key: data.referral_key
+    phone_number: data.phone_number
+    // referral_key: data.referral_key
   }).save()
     .then(function (user) {
       rep({ token: generateToken(user) });
@@ -57,9 +57,21 @@ var signupPost = function (req, rep) {
  */
 var accountPut = function (req, rep) {
   //TODO: validate request
-
+  new User({ id: req.payload.id }).fetch().then(function(user) {
+    if(!user) {
+      rep({ msg: 'Can\'t not find your user.' }).code(401);
+    } else {
+      user.save(req.payload, {
+        method: 'update',
+        patch: true
+      });
+      rep({ msg: 'Update user successfull!'}).code(200);
+    }
+  })
+  .catch(function(err) {
+    rep({ err });
+  })
 };
-
 
 /**
  * DELETE /account
@@ -75,7 +87,7 @@ var accountDelete = function (req, rep) {
  */
 var accountGet = function (req, rep) {
   var userId = req.params.id;
-  new User().where('id', userId).fetch()
+  new User().where('id', userId).fetch({columns:['id', 'name', 'email', 'address', 'phone_number', 'referral_key', 'is_referral']})
     .then(function (user) {
       rep({ user });
     }).catch(function (error) {
@@ -83,6 +95,26 @@ var accountGet = function (req, rep) {
     });
 }
 
+/**
+ * Get forgotpassword/{email}
+ * @param {*} req
+ * @param {*} rep
+ */
+var forgotPassword = function(req, rep) {
+  var email = req.params.email;
+  new User().where({ email }).fetch()
+    .then(function(user) {
+      if(!user) {
+        rep({ msg: 'Email does not exists.'}).code(401);
+      } else {
+        Mail.sendMail(user.toJSON());
+        rep({ msg: 'Please check email to do reset password.'}).code(200);
+      }
+    })
+    .catch(function(err) {
+      rep({ err });
+    })
+}
 /**
 * This function is used for internal using
 */
@@ -105,4 +137,5 @@ module.exports = {
   signup: signupPost,
   delete: accountDelete,
   validateUser: validateUser,
+  forgotPassword: forgotPassword
 }

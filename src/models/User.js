@@ -12,6 +12,7 @@ var User = bookshelf.Model.extend({
 
   initialize: function() {
     this.on('saving', this.hashPassword, this);
+    this.on('creating', this.createReferralKey, this);
   },
 
   hashPassword: function(model, attrs, options) {
@@ -38,6 +39,13 @@ var User = bookshelf.Model.extend({
       done(err, isMatch);
     });
   },
+
+  createReferralKey: function(model, attrs, options) {
+    return new Promise(function(resole, reject) {
+      model.set('referral_key', Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5));
+      resole();
+    })
+  }
 });
 
 module.exports = User;

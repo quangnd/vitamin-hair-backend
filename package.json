@@ -30,7 +30,9 @@
     "jsonwebtoken": "^8.0.1",
     "knex": "^0.13.0",
     "mysql": "^2.15.0",
-    "nsp": "^2.8.1"
+    "nodemailer": "^4.2.0",
+    "nsp": "^2.8.1",
+    "xoauth2": "^1.2.0"
   },
   "devDependencies": {
     "babel-watch": "^2.0.7",

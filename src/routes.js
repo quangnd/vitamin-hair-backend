@@ -7,6 +7,15 @@ const routeConfig = {
     failAction: 'ignore' // may also be 'ignore' or 'log'
   }
 }
+
+const routeConfigIgnoreAuth = {
+  state: {
+    parse: false, // parse and store in request.state
+      failAction: 'ignore' // may also be 'ignore' or 'log'
+  },
+  auth: false
+}
+
 const routes = [
   {
     method: 'POST',
@@ -14,19 +23,19 @@ const routes = [
     handler: function (request, reply) {
       user.login(request, reply);
     },
-    config: routeConfig
+    config: routeConfigIgnoreAuth
   },
   {
     method: 'GET',
-    path: '/users/{id}',
+    path: '/user/{id}',
     handler: function (request, reply) {
       user.getById(request, reply);
     },
     config: routeConfig
   },
   {
-    method: 'POST',
-    path: '/users',
+    method: 'PUT',
+    path: '/user',
     handler: function (request, reply) {
       user.update(request, reply);
     },
@@ -34,12 +43,20 @@ const routes = [
   },
   {
     method: 'POST',
-    path: '/user',
+    path: '/signUp',
     handler: function (request, reply) {
       user.signup(request, reply);
     },
-    config: routeConfig
-  }
+    config: routeConfigIgnoreAuth
+  },
+  {
+    method: 'GET',
+    path: '/forgotpassword/{email}',
+    handler: function (request, reply) {
+      user.forgotPassword(request, reply);
+    },
+    config: routeConfigIgnoreAuth
+  },
 ]
 //routes.push(listRoute);
 
