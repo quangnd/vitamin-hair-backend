@@ -1,3 +1,6 @@
+//Original: tuanle
+//Edit by quanngd
+//- Typo error: Renamed referal to referral
 
 exports.up = function(knex, Promise) {
   return knex.schema
@@ -9,8 +12,8 @@ exports.up = function(knex, Promise) {
         table.string('address');
         table.string('phone_number', 11).notNullable().unique();
         table.string('facebook_id').unique();
-        table.string('referal_key').notNullable().unique();
-        table.boolean('is_referal').defaultTo(false);
+        table.string('referral_key').notNullable().unique();
+        table.boolean('is_referral').defaultTo(false);
         table.string('login_token');
         table.float('credit');
         table.integer('permission').defaultTo(0);
@@ -48,7 +51,7 @@ exports.up = function(knex, Promise) {
         table.boolean('status');
         table.timestamps();
     })
-    .createTable('referals', function(table) {
+    .createTable('referrals', function(table) {
         table.integer('user_send_id');
         table.integer('user_receive_id').unique();
         table.integer('status').defaultTo(0);
@@ -58,7 +61,7 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
     return knex.schema
-        .dropTableIfExists('referals')
+        .dropTableIfExists('referrals')
         .dropTableIfExists('question_answers')
         .dropTableIfExists('articles')
         .dropTableIfExists('stores')

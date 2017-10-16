@@ -11,8 +11,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 require('babel-core/register');
 
 
-var user = require('./controllers/user');
-
 var Hapi = require('hapi');
 var Good = require('good');
 var server = new Hapi.Server();
@@ -23,31 +21,7 @@ if (process.env.NODE_ENV === 'production') {
   server.connection({ port: process.env.PORT || 3001, host: 'localhost' });
 }
 
-var routeConfig = {
-  state: {
-    parse: false, // parse and store in request.state
-    failAction: 'ignore' // may also be 'ignore' or 'log'
-  }
-};
-
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: function handler(request, reply) {
-    reply({ jsondata: "done" });
-  },
-  config: routeConfig
-});
-
-server.route({
-  method: 'GET',
-  path: '/users',
-  handler: function handler(request, reply) {
-    console.log(user.getAllUsers);
-    reply({ jsondata: "done" });
-  },
-  config: routeConfig
-});
+server.route(_routes2.default);
 
 server.register({
   register: Good,
