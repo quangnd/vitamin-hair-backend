@@ -2,6 +2,7 @@
 //https://www.npmjs.com/package/bookshelf
 const bcrypt = require('bcrypt');
 var bookshelf = require('../tools/bookShelfConfig').bookshelf;
+var shortid = require('shortid');
 
 /*
 - hasTimestamps: true will enable auto update created_at and updated_at
@@ -42,7 +43,7 @@ var User = bookshelf.Model.extend({
 
   createReferralKey: function(model, attrs, options) {
     return new Promise(function(resole, reject) {
-      model.set('referral_key', Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5));
+      model.set('referral_key', shortid.generate());
       resole();
     })
   }

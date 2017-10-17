@@ -27,11 +27,13 @@
     "good-squeeze": "^5.0.2",
     "hapi": "^16.6.2",
     "hapi-auth-jwt2": "^7.3.0",
+    "joi": "^13.0.0",
     "jsonwebtoken": "^8.0.1",
     "knex": "^0.13.0",
     "mysql": "^2.15.0",
     "nodemailer": "^4.2.0",
     "nsp": "^2.8.1",
+    "shortid": "^2.2.8",
     "xoauth2": "^1.2.0"
   },
   "devDependencies": {
